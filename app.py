@@ -21,31 +21,31 @@ from .auth import auth as auth_blueprint
 
 def create_app():
     app = Flask(__name__)
-    # TODO: add to power point
-    app.config["SECRET_KEY"] = os.environ["FLASK_SECRET_KEY"]
+    # # TODO: add to power point
+    # app.config["SECRET_KEY"] = os.environ["FLASK_SECRET_KEY"]
 
-    app.register_blueprint(auth_blueprint)
+    # app.register_blueprint(auth_blueprint)
 
-    # TODO: add to power point
-    login_manager = LoginManager()
-    login_manager.login_view = "auth.login"
-    login_manager.init_app(app)
+    # # TODO: add to power point
+    # login_manager = LoginManager()
+    # login_manager.login_view = "auth.login"
+    # login_manager.init_app(app)
 
-    # TODO: what does this do?
-    @login_manager.user_loader
-    def load_user(user_id):
-        user = User()
-        user.id = "Adam"
-        return user
+    # # TODO: what does this do?
+    # @login_manager.user_loader
+    # def load_user(user_id):
+    #     user = User()
+    #     user.id = "Adam"
+    #     return user
     
-    # TODO: add the login manager
+    # # TODO: add the login manager
     return app
 
 app = create_app()
 
 # TODO: make blueprints and somehow do cluster the functions <vision_version> or something
 @app.route('/')
-@login_required
+# @login_required
 def index():
     # TODO: there might be a nicer way to do this....
     nav = [
@@ -60,13 +60,13 @@ def index():
 
 # TODO: clean up the routes and the names to make the consistent
 @app.route('/wheelding')
-@login_required
+# @login_required
 def upload_wheelding():
     return render_template("upload.html", processing_action="/process_wheelding")
 
 
 @app.route('/process_wheelding', methods=['POST'])
-@login_required
+# @login_required
 def process_wheelding():
 
     selected_image, img_path = save_img(request)
@@ -80,13 +80,13 @@ def process_wheelding():
 
 
 @app.route('/moncherie')
-@login_required
+# @login_required
 def upload_moncherie():
     return render_template("upload.html", processing_action="/process_moncherie")
 
 
 @app.route("/process_moncherie", methods=['POST'])
-@login_required
+# @login_required
 def process_moncherie():
 
     selected_image, img_path = save_img(request)
@@ -105,13 +105,13 @@ def process_moncherie():
 
 
 @app.route("/cups")
-@login_required
+# @login_required
 def cups_page():
     return render_template("upload.html", processing_action="/process_cups")
 
 
 @app.route("/process_cups", methods=['POST'])
-@login_required
+# @login_required
 def process_cups():
     selected_image, img_path = save_img(request)
     
@@ -126,13 +126,13 @@ def process_cups():
 
 
 @app.route("/audio_upload")
-@login_required
+# @login_required
 def upload_audio():
     return render_template("upload.html", processing_action="/hf_whisper")
 
 
 @app.route("/hf_whisper")
-@login_required
+# @login_required
 def call_inference_api_whisper():
     # TODO: if this works, rename to data_input or something..
     whisper_transcribe(request.files['image'])
@@ -140,13 +140,13 @@ def call_inference_api_whisper():
 
 
 @app.route("/get_url_for_caption")
-@login_required
+# @login_required
 def get_url_for_caption():
     return render_template("image_url.html")
 
 
 @app.route("/captions")
-@login_required
+# @login_required
 def call_computer_vision_api():
     # get the url input
     # TODO: check weather the input is valid...
@@ -180,14 +180,14 @@ def call_computer_vision_api():
 
 
 @app.route('/gradio')
-@login_required
+# @login_required
 def show_gradio_app():
     return render_template("speech_protocol.html")
 
 
 # TODO: this is unused, delete or something...
 @app.route('/speech_protocol')
-@login_required
+# @login_required
 def generate_protocol():
     # TODO: use this file?? what for?
     if request.method == "POST":
