@@ -1,0 +1,13 @@
+<body>
+    <h1>Select an Image</h1>
+    <form action="/process_wheelding" method="POST">
+        <label for="image">Choose an image:</label>
+        <select name="image" id="image">
+            {% for img in images %}
+            <option value="{{ img }}">{{ img }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
