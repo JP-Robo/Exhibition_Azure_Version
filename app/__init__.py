@@ -18,7 +18,7 @@ from app.util.transcription import whisper_transcribe
 from app.util.image_helpers import save_img
 
 
-from .auth import auth as auth_blueprint
+from app.auth import auth as auth_blueprint
 
 def create_app():
     app = Flask(__name__)
