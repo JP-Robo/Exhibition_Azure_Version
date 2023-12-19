@@ -2,6 +2,7 @@ import os
 import json
 # from PIL import Image
 import sys
+import requests
 import urllib.parse
 
 from flask import Flask, render_template, request
@@ -17,7 +18,6 @@ from app.util.transcription import whisper_transcribe
 from app.util.image_helpers import save_img
 
 
-import requests
 from app.auth import auth as auth_blueprint
 
 def create_app():
