@@ -29,7 +29,7 @@ def login_post():
     username = request.form.get('username')
     password = request.form.get('password')
 
-    env_var_username = os.environ['username']
+    env_var_username = os.environ['app_username']
     env_var_password = os.environ['password']
 
     if (username == env_var_username):

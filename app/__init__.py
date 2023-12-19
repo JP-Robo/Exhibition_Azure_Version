@@ -201,8 +201,6 @@ def generate_protocol():
     return render_template('speech_protocol.html', result="no result, wrong path")
 
 
-
-
 # TODO: brauche ich das?
 if __name__ == '__main__':
    app.run(debug=True)
