@@ -39,6 +39,7 @@ def login_post():
             login_user(user)
             return redirect(url_for('index'))
         
+        
     return redirect(url_for('auth.login'))
 
 @auth.route('/logout')
