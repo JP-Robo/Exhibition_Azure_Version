@@ -1,8 +1,7 @@
 import os
 import json
-from PIL import Image
+# from PIL import Image
 import sys
-import requests
 import urllib.parse
 
 from flask import Flask, render_template, request
@@ -18,6 +17,7 @@ from app.util.transcription import whisper_transcribe
 from app.util.image_helpers import save_img
 
 
+import requests
 from app.auth import auth as auth_blueprint
 
 def create_app():
@@ -49,14 +49,15 @@ app = create_app()
 @login_required
 def index():
     # TODO: there might be a nicer way to do this....
-    nav = [
-       {'name': 'Schweißnähte', 'url': '/wheelding', 'img': '/static/images/sample_wheelding.jpg'},
-       {'name': 'MonCherie', 'url': '/moncherie', 'img' : "/static/images/moncherie2.png"},
-       {'name': 'Cups', 'url': '/cups',  'img' : "/static/images/cup.jpg"},
-       {"name": "Huggingface Whisper Inference API", 'url': '/audio_upload', 'img' : '/static/images/sample_wheelding.jpg'},
-       {'name': 'SpeechProtocol', 'url': '/gradio', 'img': '/static/images/sample_wheelding.jpg'}
-       ]
-    return render_template('index.html', nav=nav)
+    # nav = [
+    #    {'name': 'Schweißnähte', 'url': '/wheelding', 'img': '/static/images/sample_wheelding.jpg'},
+    #    {'name': 'MonCherie', 'url': '/moncherie', 'img' : "/static/images/moncherie2.png"},
+    #    {'name': 'Cups', 'url': '/cups',  'img' : "/static/images/cup.jpg"},
+    #    {"name": "Huggingface Whisper Inference API", 'url': '/audio_upload', 'img' : '/static/images/sample_wheelding.jpg'},
+    #    {'name': 'SpeechProtocol', 'url': '/gradio', 'img': '/static/images/sample_wheelding.jpg'}
+    #    ]
+    return render_template('base.html')
+    # return render_template('index.html', nav=nav)
 
 
 # TODO: clean up the routes and the names to make the consistent

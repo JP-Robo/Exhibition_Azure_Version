@@ -3,12 +3,12 @@ gunicorn
 Werkzeug==3.0.0
 
 Flask==3.0.0
+# for the login procedure
+flask-sqlalchemy 
+flask-login
 msrest
 azure-cognitiveservices-vision-customvision
 matplotlib
 # scikit-image
 gradio_client
 
-# for the login procedure
-flask-sqlalchemy 
-flask-login
