@@ -178,7 +178,8 @@ def call_computer_vision_api():
                             params=params, json=data)
     response.raise_for_status()
     analysis = response.json()
-    return json.dumps(response.json())
+    # return json.dumps(response.json())
+    return render_template("captions.html", img_url=img_url, captions_result=json.dumps(response.json()))
 
 
 @app.route('/gradio')
