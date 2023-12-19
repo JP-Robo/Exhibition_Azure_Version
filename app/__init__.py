@@ -147,7 +147,7 @@ def get_url_for_caption():
     return render_template("image_url.html")
 
 
-@app.route("/captions")
+@app.route("/captions", methods=['POST'])
 @login_required
 def call_computer_vision_api():
     # get the url input
