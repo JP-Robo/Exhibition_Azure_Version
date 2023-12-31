@@ -1,21 +1,99 @@
 {% extends 'base.html' %}
 {% block content %}
 <body>
-
-    <div><img src={{ img_url }}></div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
     <script src="https://d3js.org/queue.v1.min.js"></script>
-    <script>
-        var piechartDataUrl = "{{ captions_result }}";
-    </script>
-    <script src="{{ url_for('static', filename='js/pieChart.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/barChart.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/updateChart.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-    <div><pre id="json">{{ captions_result }}</pre></div>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+    <!-- Create a div where the graph will take place -->
+    <div id="div_template"></div>
     
+    <script>
+        var result = JSON.parse('{{captions_result | safe}}');
+
+        // get the image metadata and set the scale factor
+        var img_width = result["metadata"]["width"];
+        var img_height = result["metadata"]["height"];
+        var scale_factor = 0.5;
+        
+        var img_width_scaled = img_width * scale_factor;
+        var img_height_scaled = img_height * scale_factor
+        
+        // set the dimensions and margins of the graph
+        var margin = {top: 20, right: 25, bottom: 30, left: 40},
+          width = 450 - margin.left - margin.right,
+          height = 450 - margin.top - margin.bottom;
+        
+        // append the svg object to the body of the page
+        var svg = d3.select("#div_template")
+        .append("svg")
+          .attr("width", img_width_scaled)
+          .attr("height", img_height_scaled)
+        .append("g")
+          .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+          
+        var myimage = svg.append('image')
+            .attr('xlink:href', '{{img_url}}')
+            .attr('width', img_width_scaled)
+            .attr('height', img_height_scaled);
+          
+        var values = result.denseCaptionsResult.values;
+        
+          // create a tooltip
+          var Tooltip = d3.select("#div_template")
+            .append("div")
+            .style("opacity", 0)
+            .attr("class", "tooltip")
+            .style("background-color", "black")
+            .style("border", "solid")
+            .style("border-width", "2px")
+            .style("border-radius", "5px")
+            .style("padding", "5px")
+        
+          var mouseover = function(d) {
+            Tooltip
+              .style("opacity", 1)
+            d3.select(this)
+              .style("stroke", "pink")
+              .style("stroke-width", 10)
+              .style("opacity", 0.8)
+          }
+          var mousemove = function(d) {
+            Tooltip
+              .html(d.text + " (confidence: " + d.confidence + ")")
+              .style("left", (d3.mouse(this)[0]+70) + "px")
+              .style("top", (d3.mouse(this)[1]) + "px")
+          }
+          var mouseleave = function(d) {
+            Tooltip
+              .style("opacity", 0.5)
+            d3.select(this)
+              .style("stroke", "blue")
+              .style("opacity", 0.2)
+              .style("stroke-width", 5)
+          }
+        
+          svg.selectAll()
+            .data(values, function(d) {return d.text})
+            .enter()
+            .append("rect")
+              .attr("x", function(d) {return d.boundingBox.x * scale_factor})
+              .attr("y", function(d) {return d.boundingBox.y * scale_factor})
+              .attr("width", function(d) {return d.boundingBox.w * scale_factor})
+              .attr("height", function(d) {return d.boundingBox.h * scale_factor})
+              .style("fill", "none")
+              .style("stroke-width", 5)
+              .style("stroke", "blue")
+              .style("opacity", 0.2)
+            .on("mouseover", mouseover)
+            .on("mousemove", mousemove)
+            .on("mouseleave", mouseleave);
+            </script>
+
 </body>
 {% endblock %}
 

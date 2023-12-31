@@ -4,6 +4,7 @@ import json
 import sys
 import requests
 import urllib.parse
+import re
 
 from flask import Flask, render_template, request
 from flask_login import LoginManager, login_required
@@ -147,12 +148,10 @@ def get_url_for_caption():
     return render_template("image_url.html")
 
 
-@app.route("/captions", methods=['POST'])
+@app.route("/captions",  methods=['POST'])
 @login_required
 def call_computer_vision_api():
-    # get the url input
     # TODO: check weather the input is valid...
-    # TODO...
     img_url = request.form.get('img_url')
 
     if 'COMPUTER_VISION_KEY' in os.environ:
@@ -167,8 +166,9 @@ def call_computer_vision_api():
     analyze_url = endpoint + "computervision/imageanalysis:analyze?api-version=2023-10-01&%s"
 
     headers = {'Ocp-Apim-Subscription-Key': subscription_key}
+    # TODO: syntax for multiple features 
     params = urllib.parse.urlencode({
-        'features': 'denseCaptions', # TODO: syntax for multiple features 
+        'features': 'denseCaptions',
         'model-version': 'latest',
         'language': 'en',
     })
@@ -177,9 +177,9 @@ def call_computer_vision_api():
     response = requests.post(analyze_url, headers=headers,
                             params=params, json=data)
     response.raise_for_status()
-    analysis = response.json()
-    # return json.dumps(response.json())
-    return render_template("captions.html", img_url=img_url, captions_result=json.dumps(response.json()))
+    json_str = json.dumps(response.json())
+    json_string_safe = re.sub(r'"([^"]*)"', lambda x: x.group(0).replace("'", "´"), json_str)
+    return render_template("captions.html", img_url=img_url, captions_result=json_string_safe)
 
 
 @app.route('/gradio')
