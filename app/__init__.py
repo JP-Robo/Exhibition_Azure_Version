@@ -191,7 +191,7 @@ def show_gradio_app():
 # TODO: this is unused, delete or something...
 @app.route('/speech_protocol')
 @login_required
-def generate_protocol():
+def speech_protocol():
     # TODO: use this file?? what for?
     if request.method == "POST":
         file = request.files['file']
