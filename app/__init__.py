@@ -1,6 +1,5 @@
 import os
 import json
-# from PIL import Image
 import sys
 import requests
 import urllib.parse
@@ -18,11 +17,19 @@ from app.util.gradio_call import call_gradio_api
 from app.util.transcription import whisper_transcribe
 from app.util.image_helpers import save_img
 
-
 from app.auth import auth as auth_blueprint
 
 def create_app():
+    """creates the app and registers blueprints
+    which are grouped functionalities
+    a load user finction os created, which is used for user loading
+
+
+    Returns:
+        _type_: _description_
+    """
     app = Flask(__name__)
+
     # TODO: add to power point
     app.config["SECRET_KEY"] = os.environ["FLASK_SECRET_KEY"]
 
@@ -39,7 +46,7 @@ def create_app():
         user = User()
         user.id = "Adam"
         return user
-    
+
     # TODO: add the login manager
     return app
 
@@ -49,16 +56,12 @@ app = create_app()
 @app.route('/')
 @login_required
 def index():
-    # TODO: there might be a nicer way to do this....
-    # nav = [
-    #    {'name': 'Schweißnähte', 'url': '/wheelding', 'img': '/static/images/sample_wheelding.jpg'},
-    #    {'name': 'MonCherie', 'url': '/moncherie', 'img' : "/static/images/moncherie2.png"},
-    #    {'name': 'Cups', 'url': '/cups',  'img' : "/static/images/cup.jpg"},
-    #    {"name": "Huggingface Whisper Inference API", 'url': '/audio_upload', 'img' : '/static/images/sample_wheelding.jpg'},
-    #    {'name': 'SpeechProtocol', 'url': '/gradio', 'img': '/static/images/sample_wheelding.jpg'}
-    #    ]
+    """the index page returns the base template from which other jinja templates inherit
+
+    Returns:
+        _type_: _description_
+    """
     return render_template('base.html')
-    # return render_template('index.html', nav=nav)
 
 
 # TODO: clean up the routes and the names to make the consistent
@@ -93,8 +96,10 @@ def upload_moncherie():
 def process_moncherie():
 
     selected_image, img_path = save_img(request)
+    # TODO: what does this return?, might break the application
+    mode = request.form.get("model_version")
 
-    mode = "moncherie"
+    # mode = "moncherie"
     predictions = custom_vision_predict(img_path, mode)
     # TODO: this could be like a slider or some other kind of input
     threshold = 0.5
@@ -102,7 +107,7 @@ def process_moncherie():
     img_with_bb =  draw_bb_on_img(selected_image, predictions, mode, threshold, threshold_2)
 
     biggest_probablity, winner_label, classifier_result = custom_vision_classify_moncherie(img_path)
-    rendered_result = "Most certainly (" + str(biggest_probablity * 100)[:5] + "%) the box is " + winner_label 
+    rendered_result = "Most certainly (" + str(biggest_probablity * 100)[:5] + "%) the box is " + winner_label
 
     return render_template("moncherie.html", info=rendered_result, classification_info = str(classifier_result), img_obj=img_with_bb)
 
@@ -117,7 +122,7 @@ def cups_page():
 @login_required
 def process_cups():
     selected_image, img_path = save_img(request)
-    
+
     mode = "cups"
     predictions = custom_vision_predict(img_path, mode)
     # TODO: this could be like a slider or some other kind of input
@@ -166,7 +171,7 @@ def call_computer_vision_api():
     analyze_url = endpoint + "computervision/imageanalysis:analyze?api-version=2023-10-01&%s"
 
     headers = {'Ocp-Apim-Subscription-Key': subscription_key}
-    # TODO: syntax for multiple features 
+    # TODO: syntax for multiple features
     params = urllib.parse.urlencode({
         'features': 'denseCaptions',
         'model-version': 'latest',
@@ -206,4 +211,3 @@ def speech_protocol():
 # TODO: brauche ich das?
 if __name__ == '__main__':
    app.run(debug=True)
- 

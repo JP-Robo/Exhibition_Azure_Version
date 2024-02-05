@@ -100,9 +100,14 @@ def custom_vision_predict(img_path, version):
             publish_iteration_name = "Iteration1"
             project_id = "a86f394a-cb8e-4caf-9750-8a756c66df96"
 
-        elif version == "moncherie":
+        # TODO: i dont know if the keys are right
+        elif version == "moncherie_sw":
             publish_iteration_name = "Iteration1"
             project_id = "d15e4652-5873-4d9f-84ba-35505bce730c"
+
+        elif version == "moncherie_color":
+            publish_iteration_name = "Iteration1"
+            project_id = "9b1ea25b-2534-4731-8f82-041e0fd1ebd4"
 
         elif version == "cups":
             publish_iteration_name = "Iteration1"
