@@ -152,8 +152,20 @@ def process_cups():
 @app.route("/<mode>",  methods=['GET', 'POST'])
 @login_required
 def upload(mode):
-    return "upload successfull for mode" + mode
+    # TODO: add functionality for changing the mode
+    # TODO: if mode == receipt
+    # TODO: call the api
+    # TODO: do something accordingly
+    # return "upload successfull for mode" + mode
+    return render_template("upload.html", processing_action="/process_" +  mode)
 
+
+@app.route("/process_receipt", methods=['POST'])
+@login_required
+def process_receipt():
+    selected_image, img_path = save_img(request)
+    # TODO: add the azure api call
+    return render_template("receipt.html", img_obj=img_path)
 
 # TODO: clean the stuff comming now
 @app.route("/audio_upload")
