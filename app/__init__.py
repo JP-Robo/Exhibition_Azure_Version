@@ -99,7 +99,8 @@ def process_moncherie():
     # TODO: what does this return?, might break the application
     mode = request.form.get("model_version")
 
-    # mode = "moncherie"
+    # TODO: for now only the rgb version will be used
+    mode = "moncherie_color"
     predictions = custom_vision_predict(img_path, mode)
     # TODO: this could be like a slider or some other kind of input
     threshold = 0.5
