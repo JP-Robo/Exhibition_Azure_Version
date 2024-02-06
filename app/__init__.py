@@ -50,6 +50,7 @@ def create_app():
     # TODO: add the login manager
     return app
 
+
 app = create_app()
 
 # TODO: make blueprints and somehow do cluster the functions <vision_version> or something
@@ -96,19 +97,28 @@ def upload_moncherie():
 def process_moncherie():
 
     selected_image, img_path = save_img(request)
+
     # TODO: what does this return?, might break the application
     mode = request.form.get("model_version")
 
-    # TODO: for now only the rgb version will be used
-    mode = "moncherie_rgb"
+    # TODO: for now only the rgb version will be used 
+    mode = "moncherie_color"
     predictions = custom_vision_predict(img_path, mode)
+
     # TODO: this could be like a slider or some other kind of input
     threshold = 0.5
     threshold_2 = 0.1
     img_with_bb =  draw_bb_on_img(selected_image, predictions, mode, threshold, threshold_2)
 
-    biggest_probablity, winner_label, classifier_result = custom_vision_classify_moncherie(img_path)
-    rendered_result = "Most certainly (" + str(biggest_probablity * 100)[:5] + "%) the box is " + winner_label
+    # get the classification
+    # TODO: is only trained on the sw images
+    if mode == "moncherie_sw":
+
+        biggest_probablity, winner_label, classifier_result = custom_vision_classify_moncherie(img_path)
+        rendered_result = "Most certainly (" + str(biggest_probablity * 100)[:5] + "%) the box is " + winner_label
+
+    else:
+        rendered_result = "No classification model given for model" + mode
 
     return render_template("moncherie.html", info=rendered_result, classification_info = str(classifier_result), img_obj=img_with_bb)
 
@@ -148,6 +158,7 @@ def call_inference_api_whisper():
     return render_template("speech_protocol.html")
 
 
+# TODO: is this the protocol?
 @app.route("/get_url_for_caption")
 @login_required
 def get_url_for_caption():

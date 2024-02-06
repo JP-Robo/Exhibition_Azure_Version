@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <title>ComputerVision demonstrator</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ComputerVision demonstrator</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
 </head>
+
+
 <body>
-      <!-- the navbar TODO: change the urls -->
+    <!-- navbar functionality is in the header -->
       <header>
         <nav class="navbar">
             <a href="#" class="nav-branding">ROBOTRON.</a>
@@ -70,14 +73,20 @@
 
     </header>
 
-  <section class="hero is-primary is-fullheight">
-    <div class="hero-body">
-        <div class="container has-text-centered">
-           {% block content %}
-           {% endblock %}
+
+    <section class="hero is-primary is-fullheight">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+
+            {% block content %}
+            <!-- the child elements go here -->
+            {% endblock %}
+            
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+
+
 </body>
 </html>
 
