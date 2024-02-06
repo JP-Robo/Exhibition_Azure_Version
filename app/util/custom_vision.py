@@ -94,6 +94,8 @@ def custom_vision_predict(img_path, version):
     """
     # TODO: actually it would be better not to intertwine the two calls i guess
     with open(img_path, "rb") as image_contents:
+
+        print("Version", version)
         
         # TODO: if more is added, it would be nice to compose this somehow in a dict
         if version == "wheelding":

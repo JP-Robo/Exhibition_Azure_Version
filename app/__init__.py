@@ -99,10 +99,10 @@ def process_moncherie():
     selected_image, img_path = save_img(request)
 
     # TODO: what does this return?, might break the application
-    mode = request.form.get("model_version")
+    # mode = request.form.get("model_version")
 
     # TODO: for now only the rgb version will be used 
-    mode = "moncherie_color"
+    mode = "moncherie_sw"
     predictions = custom_vision_predict(img_path, mode)
 
     # TODO: this could be like a slider or some other kind of input
