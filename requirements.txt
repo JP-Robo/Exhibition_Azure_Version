@@ -12,3 +12,4 @@ matplotlib
 # scikit-image
 gradio_client
 
+azure-ai-formrecognizer==3.2.0
