@@ -6,6 +6,7 @@
             <h1>Select an image</h1>
 
             {% if processing_action == "/process_moncherie" %}
+            <!-- this part is for the moncherie model -->
                 <form method="POST" action={{processing_action}} enctype="multipart/form-data">
                     <select name="" id="">
                         <option value="moncherie_color">Model RGB</option>
@@ -15,6 +16,7 @@
                     <input type="submit" value="Upload">
                 </form>
             {% else %}
+            <!-- the rest of the models, go to the given url on click -->
                 <form method="POST" action={{processing_action}} enctype="multipart/form-data">
                     <input type="file" name="image">
                     <input type="submit" value="Upload">
