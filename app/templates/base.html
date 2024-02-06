@@ -6,9 +6,62 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>exhibition ComputerVision demonstrator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
 </head>
 <body>
+      <!-- the navbar TODO: change the urls -->
+      <header>
+        <nav class="navbar">
+            <a href="#" class="nav-branding">DEV.</a>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="{{url_for('main.home')}}" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{url_for('main.home')}}" class="nav-link">Flask nav link to home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{url_for('main.profile')}}" class="nav-link">
+                        Profile
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Lost</a>
+                </li>
+            </ul>
+            <!-- this is just style items for the navbar display -->
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+
+
+        <!-- logic for the navbar -->
+        <script>
+
+            const hamburger = document.querySelector(".hamburger");
+            const navMenu = document.querySelector(".nav-menu");
+            
+            hamburger.addEventListener("click", () => {
+                hamburger.classList.toggle("active");
+                navMenu.classList.toggle("active");
+            })
+            
+            document.querySelector("nav-link").forEach( n =>
+                n.addEventListener("click", () => {
+                hamburger.classList.remove("active");
+                navMenu.classList.remove("active");
+            }))
+
+            console.log("Script has been called");
+
+        </script>
+
+    </header>
+
   <section class="hero is-primary is-fullheight">
 
     <div class="hero-head">

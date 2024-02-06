@@ -1,0 +1,117 @@
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+header{
+    background-color: rgb(255, 127, 146);
+}
+
+
+li{
+    list-style: none;
+}
+
+
+a{
+    color: dodgerblue;
+    text-decoration: none;
+}
+
+
+.box{
+    color: #ffffff00;
+}
+
+
+.navbar{
+    min-height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+}
+
+/* // styling of the big display navbar */
+.nav-menu{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 60px;
+}
+
+.nav-branding{
+    font-size: 2rem;
+}
+
+/* for the hover effect */
+.nav-link{
+    transition:0.7s ease;
+}
+
+
+.nav-link:hover{
+    color:deepskyblue;
+}
+
+/* dont want the hamburger to display */
+.hamburger{
+    display:none;
+    cursor: pointer;
+}
+
+.bar{
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    background-color: dodgerblue;
+}
+
+
+@media(max-width:768px){
+
+    .hamburger{
+        display: block;
+    }
+    /* activate the bar with js --> later */
+    /* will change the bars and make a cross appear */
+    .hamburger.active .bar:nth-child(2){
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1){
+        transform:translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(3){
+        transform:translateY(-8px) rotate(-45deg);
+    }
+
+
+    .nav-menu{
+        /* on scrolling down the menu remains on the screen */
+        position:fixed;
+        left: -100%;
+        top: 70px;
+        gap: 0;
+        flex-direction: column;
+        background-color: pink;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+    }
+
+    .nav-item{
+        margin: 16px 0;
+    }
+
+    .nav-menu.active{
+        /* display the menu, will be activated with js*/
+        left: 0;
+    }
+}
