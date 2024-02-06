@@ -16,13 +16,15 @@ from app.util.image_helpers import draw_bb_on_img
 from app.util.transcription import whisper_transcribe
 from app.util.image_helpers import save_img
 
+# form recognition inputs
+# from app.azure_api.form_recognition import *
+
 from app.auth import auth as auth_blueprint
 
 def create_app():
     """creates the app and registers blueprints
     which are grouped functionalities
     a load user finction os created, which is used for user loading
-
 
     Returns:
         _type_: _description_
@@ -146,6 +148,14 @@ def process_cups():
     return render_template("cups.html", img_obj=img_with_bb)
 
 
+# TODO: check if this really enables dynamic routing
+@app.route("/<mode>",  methods=['GET', 'POST'])
+@login_required
+def upload(mode):
+    return "upload successfull for mode" + mode
+
+
+# TODO: clean the stuff comming now
 @app.route("/audio_upload")
 @login_required
 def upload_audio():
