@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>exhibition ComputerVision demonstrator</title>
+    <title>ComputerVision demonstrator</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
 </head>
@@ -13,23 +13,31 @@
       <!-- the navbar TODO: change the urls -->
       <header>
         <nav class="navbar">
-            <a href="#" class="nav-branding">DEV.</a>
+            <a href="#" class="nav-branding">ROBOTRON.</a>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Home</a>
+                    <a href="{{ url_for('upload_wheelding') }}" class="nav-link">Wheelding</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Flask nav link to home</a>
+                    <a href="{{ url_for('upload_moncherie') }}" class="nav-link">Moncherie</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        Profile
-                    </a>
+                    <a href="{{ url_for('cups_page') }}" class="nav-link">Cups</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Lost</a>
+                    <a href="{{ url_for('get_url_for_caption') }}" class="nav-link">Captions</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('speech_protocol') }}" class="nav-link">Protocol</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('auth.login') }}" class="nav-link">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{url_for('auth.logout')}}" class="nav-link">Logout</a>
                 </li>
             </ul>
+
             <!-- this is just style items for the navbar display -->
             <div class="hamburger">
                 <span class="bar"></span>
@@ -39,7 +47,7 @@
         </nav>
 
 
-        <!-- logic for the navbar -->
+        <!-- logic for the navbar, on click the icon toggles between cross and hamburger icon -->
         <script>
 
             const hamburger = document.querySelector(".hamburger");
@@ -63,41 +71,6 @@
     </header>
 
   <section class="hero is-primary is-fullheight">
-
-    <div class="hero-head">
-        <nav class="navbar">
-            <div class="container">
-
-                <div id="navbarMenuHeroA" class="navbar-menu">
-                    <div class="navbar-end">
-                        <!-- the input is the function name, not the route -->
-                        <a href="{{ url_for('upload_wheelding') }}" class="navbar-item">
-                            Wheelding
-                        </a>
-                        <a href="{{ url_for('upload_moncherie') }}" class="navbar-item">
-                            Moncherie
-                        </a>
-                        <a href="{{ url_for('cups_page') }}" class="navbar-item">
-                            Cups
-                        </a>
-                        <a href="{{ url_for('get_url_for_caption') }}" class="navbar-item">
-                            Captions
-                        </a>
-                        <a href="{{ url_for('speech_protocol') }}" class="navbar-item">
-                            Speech_Protocol
-                        </a>
-                        <a href="{{ url_for('auth.login') }}" class="navbar-item">
-                            Login
-                        </a>
-                        <a href="{{url_for('auth.logout')}}" class="navbar-item">
-                            Logout
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </div>
-
     <div class="hero-body">
         <div class="container has-text-centered">
            {% block content %}
