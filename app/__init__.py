@@ -213,11 +213,12 @@ def show_gradio_app():
 @login_required
 def speech_protocol():
     # TODO: use this file?? what for?
-    if request.method == "POST":
-        file = request.files['file']
-        if file:
-            audio_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
-            return render_template('speech_protocol.html', result=call_gradio_api(audio_path))
+    # TODO: the post thing in the function fall is missing, see above
+    # if request.method == "POST":
+    #     file = request.files['file']
+    #     if file:
+    #         audio_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+    #         return render_template('speech_protocol.html', result=call_gradio_api(audio_path))
     # TODO: include the gradio call
     # this page has the gradio space embedded
     return render_template('speech_protocol.html', result="no result, wrong path")

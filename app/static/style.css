@@ -21,10 +21,6 @@ a{
 }
 
 
-.box{
-    color: #ffffff00;
-}
-
 
 .navbar{
     min-height: 70px;
@@ -56,7 +52,7 @@ a{
     color:deepskyblue;
 }
 
-/* dont want the hamburger to display */
+/* dont want the hamburger to display, except it is defined */
 .hamburger{
     display:none;
     cursor: pointer;
@@ -73,11 +69,13 @@ a{
 }
 
 
+/* make the application reactive to the size */
 @media(max-width:768px){
 
     .hamburger{
         display: block;
     }
+    
     /* activate the bar with js --> later */
     /* will change the bars and make a cross appear */
     .hamburger.active .bar:nth-child(2){
