@@ -95,6 +95,7 @@ def upload_moncherie():
 @app.route("/process_moncherie", methods=['POST'])
 @login_required
 def process_moncherie():
+    # moncherie sw works kindof... 
 
     selected_image, img_path = save_img(request)
 
@@ -102,12 +103,13 @@ def process_moncherie():
     # mode = request.form.get("model_version")
 
     # TODO: for now only the rgb version will be used 
-    mode = "moncherie_sw"
+    mode = "moncherie_color"
     predictions = custom_vision_predict(img_path, mode)
 
     # TODO: this could be like a slider or some other kind of input
     threshold = 0.5
     threshold_2 = 0.1
+
     img_with_bb =  draw_bb_on_img(selected_image, predictions, mode, threshold, threshold_2)
 
     # get the classification
@@ -119,6 +121,7 @@ def process_moncherie():
 
     else:
         rendered_result = "No classification model given for model" + mode
+        classifier_result = "No classifier, no info"
 
     return render_template("moncherie.html", info=rendered_result, classification_info = str(classifier_result), img_obj=img_with_bb)
 

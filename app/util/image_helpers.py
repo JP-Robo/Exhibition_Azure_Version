@@ -96,7 +96,11 @@ def draw_bb_on_img(img_path, predictions, mode, threshold, threshold_2):
     # TODO: does it work, because they coords are accesd via index and not key
     if mode == "wheelding":
         display_wheelding(predictions, img, ax, threshold, threshold_2)
-    elif mode == "moncherie":
+    elif mode == "moncherie_sw":
+        # TODO: why is there this ","
+        counter = display_moncherie(predictions, img, ax,)
+        plt.xlabel(str(counter))
+    elif mode == "moncherie_color":
         # TODO: why is there this ","
         counter = display_moncherie(predictions, img, ax,)
         plt.xlabel(str(counter))
