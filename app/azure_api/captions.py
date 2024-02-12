@@ -10,6 +10,7 @@
 #     client = ComputerVisionClient(endpoint=os.environ["VISION_ENDPOINT"], credentials=cred)
 
 #     with open(img_path, "rb") as img:
+#         # TODO: check out other options
 #         result = client.describe_image_in_stream(img)
 
 #     return result

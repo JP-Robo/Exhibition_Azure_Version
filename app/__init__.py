@@ -17,7 +17,8 @@ from app.util.transcription import whisper_transcribe
 from app.util.image_helpers import save_img
 from app.util.image_helpers import display_receipt
 
-
+# TODO: import the module
+# from app.azure_api.captions import 
 from app.azure_api.form_recognition import get_receipt_info_str
 # form recognition inputs
 # from app.azure_api.form_recognition import *
