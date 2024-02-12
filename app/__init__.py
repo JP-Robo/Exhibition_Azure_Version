@@ -162,18 +162,18 @@ def upload(mode):
 def process_receipt():
     selected_image, img_path = save_img(request) # save the image like everywhere else
 
-    mode = "cups"
+    # mode = "cups"
 
-    predictions = custom_vision_predict(img_path, mode)
-    # TODO: this could be like a slider or some other kind of input
-    threshold = 0.5
-    threshold_2 = 0.1
-    img_with_bb =  draw_bb_on_img(selected_image, predictions, mode, threshold, threshold_2)
+    # predictions = custom_vision_predict(img_path, mode)
+    # # TODO: this could be like a slider or some other kind of input
+    # threshold = 0.5
+    # threshold_2 = 0.1
+    # img_with_bb =  draw_bb_on_img(selected_image, predictions, mode, threshold, threshold_2)
 
 
-    # receipt_info = get_receipt_info_str(img_path)
+    receipt_info = get_receipt_info_str(img_path)
     # TODO: add the azure api call
-    return render_template("receipt.html", img_path=img_with_bb, receipt_info="receipt_info")
+    return render_template("receipt.html", img_path=img_path, receipt_info=receipt_info)
 
 # TODO: clean the stuff comming now
 @app.route("/audio_upload")
