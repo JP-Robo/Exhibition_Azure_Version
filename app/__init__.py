@@ -194,8 +194,12 @@ def get_url_for_caption():
 @app.route("/process_captions")
 @login_required
 def process_captions():
-    selected_image, img_path = save_img(request) # save the image like everywhere else
-    return "process captions route works"
+    selected_image, img_path = save_img(request) 
+
+    # TODO: call the image caption thingi
+
+    # return "process captions route works"
+    return render_template("captions_upload.html")
     # return render_template("captions.html", img_url=img_path)
 
 
