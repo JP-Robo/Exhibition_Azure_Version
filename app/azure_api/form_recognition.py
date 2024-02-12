@@ -11,11 +11,15 @@ def call_API_Receipt(img_path):
     document_analysis_client = DocumentAnalysisClient(endpoint=endpoint, credential=AzureKeyCredential(key))
     with open(img_path, 'rb') as img:
       poller = document_analysis_client.begin_analyze_document("prebuilt-receipt", img)
-      # poller = document_analysis_client.begin_analyze_document("prebuilt-layout", img)
 
     return poller.result()
 
 
 def get_receipt_info_str(img_path):
-   result = call_API_Receipt(img_path)
-   return str(result.to_dict())
+  try:
+    result = call_API_Receipt(img_path)
+    result = str(result.to_dict())
+  except:
+    result = "api call not working,..."
+  
+  return result
