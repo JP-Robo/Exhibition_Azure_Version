@@ -89,6 +89,7 @@ def process_wheelding():
 
     return render_template("wheelding.html", img_path=img_with_bb)
 
+
 @app.route('/moncherie')
 @login_required
 def upload_moncherie():
@@ -150,7 +151,6 @@ def process_cups():
     return render_template("cups.html", img_obj=img_with_bb, img_path=img_path)
 
 
-# TODO: check if this really enables dynamic routing
 @app.route("/<mode>",  methods=['GET', 'POST'])
 @login_required
 def upload(mode):
@@ -160,7 +160,7 @@ def upload(mode):
 @app.route("/process_receipt", methods=['POST'])
 @login_required
 def process_receipt():
-    selected_image, img_path = save_img(request) # save the image like everywhere else
+    selected_image, img_path = save_img(request) 
 
     receipt_info = get_receipt_info_str(img_path)
     img = display_receipt(img_path, receipt_info)
@@ -170,82 +170,53 @@ def process_receipt():
     return render_template("receipt.html", img=img, receipt_info=receipt_info)
 
 
-# TODO: clean the stuff comming now
-@app.route("/audio_upload")
-@login_required
-def upload_audio():
-    return render_template("upload.html", processing_action="/hf_whisper")
-
-
-@app.route("/hf_whisper")
-@login_required
-def call_inference_api_whisper():
-    # TODO: if this works, rename to data_input or something..
-    whisper_transcribe(request.files['image'])
-    return render_template("speech_protocol.html")
-
-
-# TODO: is this the protocol?
-@app.route("/get_url_for_caption")
-@login_required
-def get_url_for_caption():
-    return render_template("image_url.html")
-
-
 @app.route("/process_captions", methods=['POST'])
 @login_required
 def process_captions():
-    selected_image, img_path = save_img(request) 
+    # selected_image, img_path = save_img(request) 
 
     # TODO: call the image caption thingi
 
-    # return "process captions route works"
-    return render_template("captions_upload.html")
+    return "process captions route works"
+    # return render_template("captions_upload.html")
     # return render_template("captions.html", img_url=img_path)
 
+# TODO: i might need this for the d3.js thingi
+# @app.route("/captions",  methods=['POST'])
+# @login_required
+# def call_computer_vision_api():
+#     # TODO: check weather the input is valid...
+#     img_url = request.form.get('img_url')
 
-@app.route("/captions",  methods=['POST'])
-@login_required
-def call_computer_vision_api():
-    # TODO: check weather the input is valid...
-    img_url = request.form.get('img_url')
+#     if 'COMPUTER_VISION_KEY' in os.environ:
+#         subscription_key = os.environ['COMPUTER_VISION_KEY']
+#     else:
+#         print("\nSet the COMPUTER_VISION_KEY environment variable.\n**Restart your shell or IDE for changes to take effect.**")
+#         sys.exit()
 
-    if 'COMPUTER_VISION_KEY' in os.environ:
-        subscription_key = os.environ['COMPUTER_VISION_KEY']
-    else:
-        print("\nSet the COMPUTER_VISION_KEY environment variable.\n**Restart your shell or IDE for changes to take effect.**")
-        sys.exit()
+#     if 'COMPUTER_VISION_ENDPOINT' in os.environ:
+#         endpoint = os.environ['COMPUTER_VISION_ENDPOINT']
 
-    if 'COMPUTER_VISION_ENDPOINT' in os.environ:
-        endpoint = os.environ['COMPUTER_VISION_ENDPOINT']
+#     analyze_url = endpoint + "computervision/imageanalysis:analyze?api-version=2023-10-01&%s"
 
-    analyze_url = endpoint + "computervision/imageanalysis:analyze?api-version=2023-10-01&%s"
+#     headers = {'Ocp-Apim-Subscription-Key': subscription_key}
+#     # TODO: syntax for multiple features
+#     params = urllib.parse.urlencode({
+#         'features': 'denseCaptions',
+#         'model-version': 'latest',
+#         'language': 'en',
+#     })
+#     data = {'url': img_url}
 
-    headers = {'Ocp-Apim-Subscription-Key': subscription_key}
-    # TODO: syntax for multiple features
-    params = urllib.parse.urlencode({
-        'features': 'denseCaptions',
-        'model-version': 'latest',
-        'language': 'en',
-    })
-    data = {'url': img_url}
-
-    # TODO: cant i just use the path here?
-    response = requests.post(analyze_url, headers=headers,
-                            params=params, json=data)
-    response.raise_for_status()
-    json_str = json.dumps(response.json())
-    json_string_safe = re.sub(r'"([^"]*)"', lambda x: x.group(0).replace("'", "´"), json_str)
-    return render_template("captions.html", img_url=img_url, captions_result=json_string_safe)
-
-
-@app.route('/gradio')
-@login_required
-def show_gradio_app():
-    return render_template("speech_protocol.html")
+#     # TODO: cant i just use the path here?
+#     response = requests.post(analyze_url, headers=headers,
+#                             params=params, json=data)
+#     response.raise_for_status()
+#     json_str = json.dumps(response.json())
+#     json_string_safe = re.sub(r'"([^"]*)"', lambda x: x.group(0).replace("'", "´"), json_str)
+#     return render_template("captions.html", img_url=img_url, captions_result=json_string_safe)
 
 
-# TODO: this is unused, delete or something...
 @app.route('/speech_protocol')
 @login_required
 def speech_protocol():

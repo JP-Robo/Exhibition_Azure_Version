@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-    <!-- adding the script to D3.js visualizatoins -->
     <script src="http://d3js.org/d3.v2.js"></script> 
     <title>ComputerVision demonstrator</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -13,9 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
 </head>
 
-
 <body>
-    <!-- navbar functionality is in the header -->
       <header>
         <nav class="navbar">
             <a href="#" class="nav-branding">ROBOTRON.</a>
@@ -30,18 +27,14 @@
                     <a href="{{ url_for('cups_page') }}" class="nav-link">Cups</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url_for('get_url_for_caption') }}" class="nav-link">Captions</a>
-                </li>
-                <li class="nav-item">
                     <a href="{{ url_for('speech_protocol') }}" class="nav-link">Protocol</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url_for('upload', mode='receipt')}}" class="nav-link">Formular</a>
+                    <a href="{{ url_for('upload', mode='receipt')}}" class="nav-link">Receipt</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url_for('upload', mode='captions')}}" class="nav-link">Captions Upload</a>
+                    <a href="{{ url_for('upload', mode='captions')}}" class="nav-link">Captions</a>
                 </li>
-
                 <li class="nav-item">
                     <a href="{{ url_for('auth.login') }}" class="nav-link">Login</a>
                 </li>
