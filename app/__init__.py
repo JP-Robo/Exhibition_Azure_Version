@@ -165,9 +165,9 @@ def process_receipt():
     receipt_info = get_receipt_info_str(img_path)
     img = display_receipt(img_path, receipt_info)
 
-    return "pls no server errror"
+    # return "pls no server errror"
     # TODO: add the azure api call
-    # return render_template("receipt.html", img=img, img_path=img_path, receipt_info=receipt_info)
+    return render_template("receipt.html", img=img, img_path=img_path, receipt_info=receipt_info)
 
 # TODO: clean the stuff comming now
 @app.route("/audio_upload")
@@ -189,6 +189,12 @@ def call_inference_api_whisper():
 @login_required
 def get_url_for_caption():
     return render_template("image_url.html")
+
+@app.route("/process_captions")
+@login_required
+def process_captions():
+    selected_image, img_path = save_img(request) # save the image like everywhere else
+    return "process captions route works"
 
 
 @app.route("/captions",  methods=['POST'])
