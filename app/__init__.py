@@ -166,7 +166,7 @@ def process_receipt():
 
     # return "pls no server errror"
     # TODO: add the azure api call
-    return render_template("receipt.html")
+    return render_template("receipt.html", img=img)
 
 # TODO: clean the stuff comming now
 @app.route("/audio_upload")
