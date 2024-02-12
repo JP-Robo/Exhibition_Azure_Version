@@ -2,13 +2,38 @@
 {% block content %}
 <body>
     <div class="container  overflow-hidden">
+        <script type="text/javascript">
+            var svg = d3.select("body")
+                .append("svg")
+                .attr("width", 200)
+                .attr("height", 100)
+                .style("border", "1px solid black")
+                .style("background-color", "green");
+
+            var text = svg.selectAll("text")
+                .data([0])
+                .enter()
+                .append("text")
+                .text("Testing")
+                .attr("x", "40")
+                .attr("y", "60");
+
+            var imgs = svg.selectAll("img").data([0]);
+                imgs.enter()
+                .append("svg:img")
+                .attr("xlink:href", "file:/tmp/tester.png")
+                .attr("x", "60")
+                .attr("y", "60")
+                .attr("width", "20")
+                .attr("height", "20");
+
+        </script>
 
         <div class="row gy-4">
             <h1>Receipt recognition</h1>
             <h2>Image path is: {{img_path}}</h2>
             <img class="card-img" src={{img_path}} alt="Card image cap">
-            <img class="card-img" src='data:image/png;base64,{{img_path}}' alt="Card image cap">
-            <img src={{img_path}} alt="My Image">
+            <!-- <img class="card-img" src='data:image/png;base64,{{img_path}}' alt="Card image cap"> -->
             <img src={{img_path}} alt="My Image">
             <p>{{receipt_info}}</p>
         </div>
