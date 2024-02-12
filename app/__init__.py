@@ -147,7 +147,7 @@ def process_cups():
     threshold_2 = 0.1
     img_with_bb =  draw_bb_on_img(selected_image, predictions, mode, threshold, threshold_2)
 
-    return render_template("cups.html", img_obj=img_with_bb)
+    return render_template("cups.html", img_obj=img_with_bb, img_path=img_path)
 
 
 # TODO: check if this really enables dynamic routing
