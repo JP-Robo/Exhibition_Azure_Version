@@ -7,7 +7,7 @@ import base64
 
 def save_img(request):
     selected_image = request.files['image']
-    img_path =  "/tmp/" + selected_image.filename
+    img_path =  "/app/static/images/upload/" + selected_image.filename
     selected_image.save(img_path)
     return selected_image, img_path
 
