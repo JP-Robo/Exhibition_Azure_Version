@@ -163,7 +163,7 @@ def process_receipt():
     selected_image, img_path = save_img(request) # save the image like everywhere else
 
     receipt_info = get_receipt_info_str(img_path)
-    # img = display_receipt(img_path)
+    img = display_receipt(img_path, receipt_info)
 
     return "pls no server errror"
     # TODO: add the azure api call
