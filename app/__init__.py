@@ -54,7 +54,6 @@ def create_app():
     # TODO: add the login manager
     return app
 
-
 app = create_app()
 
 # TODO: make blueprints and somehow do cluster the functions <vision_version> or something
@@ -190,11 +189,13 @@ def call_inference_api_whisper():
 def get_url_for_caption():
     return render_template("image_url.html")
 
+
 @app.route("/process_captions")
 @login_required
 def process_captions():
     selected_image, img_path = save_img(request) # save the image like everywhere else
-    return "process captions route works"
+    # return "process captions route works"
+    return render_template("captions.html", img_url=img_path)
 
 
 @app.route("/captions",  methods=['POST'])
