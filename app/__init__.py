@@ -164,10 +164,8 @@ def upload(mode):
 @login_required
 def process_receipt():
     selected_image, img_path = save_img(request)
-    with open(img_path, 'rb') as img:
-        img = img
     # TODO: add the azure api call
-    return render_template("receipt.html", img_obj=img)
+    return render_template("receipt.html", img_path=img_path)
 
 # TODO: clean the stuff comming now
 @app.route("/audio_upload")
