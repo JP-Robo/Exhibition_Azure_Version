@@ -16,6 +16,8 @@ from app.util.image_helpers import draw_bb_on_img
 from app.util.transcription import whisper_transcribe
 from app.util.image_helpers import save_img
 
+
+from app.azure_api.form_recognition import get_receipt_info_str
 # form recognition inputs
 # from app.azure_api.form_recognition import *
 
@@ -164,8 +166,9 @@ def upload(mode):
 @login_required
 def process_receipt():
     selected_image, img_path = save_img(request)
+    receipt_info = get_receipt_info_str(img_path)
     # TODO: add the azure api call
-    return render_template("receipt.html", img_path=img_path)
+    return render_template("receipt.html", img_path=img_path, receipt_info=receipt_info)
 
 # TODO: clean the stuff comming now
 @app.route("/audio_upload")
