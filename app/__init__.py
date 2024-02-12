@@ -166,7 +166,8 @@ def process_receipt():
 
     # return "pls no server errror"
     # TODO: add the azure api call
-    return render_template("receipt.html", img=img)
+    return render_template("receipt.html", img=img, receipt_info=receipt_info)
+
 
 # TODO: clean the stuff comming now
 @app.route("/audio_upload")
@@ -194,8 +195,8 @@ def get_url_for_caption():
 @login_required
 def process_captions():
     selected_image, img_path = save_img(request) # save the image like everywhere else
-    # return "process captions route works"
-    return render_template("captions.html", img_url=img_path)
+    return "process captions route works"
+    # return render_template("captions.html", img_url=img_path)
 
 
 @app.route("/captions",  methods=['POST'])

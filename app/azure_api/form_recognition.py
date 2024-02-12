@@ -24,5 +24,4 @@ def get_receipt_info_str(img_path):
     result = str(result.to_dict())
   except:
     result = "api call not working,..."
-  
   return result
