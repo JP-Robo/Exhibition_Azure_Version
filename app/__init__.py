@@ -214,6 +214,7 @@ def call_computer_vision_api():
     })
     data = {'url': img_url}
 
+    # TODO: cant i just use the path here?
     response = requests.post(analyze_url, headers=headers,
                             params=params, json=data)
     response.raise_for_status()
