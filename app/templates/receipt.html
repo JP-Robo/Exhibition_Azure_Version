@@ -29,7 +29,7 @@
         var imgs = svg.selectAll("img").data([0]);
             imgs.enter()
             .append("svg:img")
-            .attr("xlink:href", "file:/tmp/tester.png")
+            .attr("xlink:href", "file:{{img_path}}")
             .attr("x", "60")
             .attr("y", "60")
             .attr("width", "20")
