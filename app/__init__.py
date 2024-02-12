@@ -165,7 +165,8 @@ def upload(mode):
 @app.route("/process_receipt", methods=['POST'])
 @login_required
 def process_receipt():
-    selected_image, img_path = save_img(request)
+    selected_image, img_path = save_img(request) # save the image like everywhere else
+
     receipt_info = get_receipt_info_str(img_path)
     # TODO: add the azure api call
     return render_template("receipt.html", img_path=img_path, receipt_info=receipt_info)
