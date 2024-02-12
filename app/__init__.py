@@ -191,7 +191,7 @@ def get_url_for_caption():
     return render_template("image_url.html")
 
 
-@app.route("/process_captions")
+@app.route("/process_captions", methods=['POST'])
 @login_required
 def process_captions():
     selected_image, img_path = save_img(request) 

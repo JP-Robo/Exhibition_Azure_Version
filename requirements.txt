@@ -8,6 +8,7 @@ flask-sqlalchemy
 flask-login
 msrest
 azure-cognitiveservices-vision-customvision
+azure-cognitiveservices-vision-computervision
 matplotlib
 # scikit-image
 gradio_client
