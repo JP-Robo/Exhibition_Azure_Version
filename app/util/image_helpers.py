@@ -113,3 +113,22 @@ def draw_bb_on_img(img_path, predictions, mode, threshold, threshold_2):
 
     # Embed the result in the html output.
     return base64.b64encode(buf.getbuffer()).decode("ascii")
+
+
+def display_receipt(img_path, results):
+    # TODO: do something with the result dict
+    plt.style.use("seaborn-v0_8-dark")
+
+    fig, ax = plt.subplots(1,2)
+
+    img = Image.open(img_path)
+    
+    ax[0].imshow(img)
+    ax[1].imshow(img)
+
+    buf = BytesIO()
+    fig.savefig(buf, format="png")
+
+    return base64.b64encode(buf.getbuffer()).decode("ascii")
+
+     

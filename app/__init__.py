@@ -15,6 +15,7 @@ from app.util.custom_vision import custom_vision_predict, custom_vision_classify
 from app.util.image_helpers import draw_bb_on_img
 from app.util.transcription import whisper_transcribe
 from app.util.image_helpers import save_img
+from app.util.image_helpers import display_receipt
 
 
 from app.azure_api.form_recognition import get_receipt_info_str
@@ -87,7 +88,6 @@ def process_wheelding():
     img_with_bb =  draw_bb_on_img(selected_image, predictions, mode, threshold=0.5, threshold_2=0.1)
 
     return render_template("wheelding.html", img_path=img_with_bb)
-
 
 @app.route('/moncherie')
 @login_required
@@ -163,8 +163,10 @@ def process_receipt():
     selected_image, img_path = save_img(request) # save the image like everywhere else
 
     receipt_info = get_receipt_info_str(img_path)
+    img = display_receipt(img_path)
+
     # TODO: add the azure api call
-    return render_template("receipt.html", img_path=img_path, receipt_info=receipt_info)
+    return render_template("receipt.html", img=img, img_path=img_path, receipt_info=receipt_info)
 
 # TODO: clean the stuff comming now
 @app.route("/audio_upload")
