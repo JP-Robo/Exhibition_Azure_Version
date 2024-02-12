@@ -2,8 +2,9 @@
 {% block content %}
 <body>
     <div class="container  overflow-hidden">
+        <div id="div_receipt_img"></div>
         <script type="text/javascript">
-            var svg = d3.select("body")
+            var svg = d3.select("#div_receipt_img")
                 .append("svg")
                 .attr("width", 200)
                 .attr("height", 100)
