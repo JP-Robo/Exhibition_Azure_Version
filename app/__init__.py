@@ -69,12 +69,17 @@ def index():
     return render_template('base.html')
 
 
+@app.route("/<mode>",  methods=['GET', 'POST'])
+@login_required
+def upload(mode):
+    return render_template("upload.html", processing_action="/process_" +  mode)
+
+
 # TODO: clean up the routes and the names to make the consistent
 @app.route('/wheelding')
 @login_required
 def upload_wheelding():
     return render_template("upload.html", processing_action="/process_wheelding")
-
 
 @app.route('/process_wheelding', methods=['POST'])
 @login_required
@@ -151,12 +156,6 @@ def process_cups():
     return render_template("cups.html", img_obj=img_with_bb, img_path=img_path)
 
 
-@app.route("/<mode>",  methods=['GET', 'POST'])
-@login_required
-def upload(mode):
-    return render_template("upload.html", processing_action="/process_" +  mode)
-
-
 @app.route("/process_receipt", methods=['POST'])
 @login_required
 def process_receipt():
@@ -180,6 +179,7 @@ def process_captions():
     return "process captions route works"
     # return render_template("captions_upload.html")
     # return render_template("captions.html", img_url=img_path)
+
 
 # TODO: i might need this for the d3.js thingi
 # @app.route("/captions",  methods=['POST'])

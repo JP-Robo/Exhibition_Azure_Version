@@ -115,20 +115,21 @@ def draw_bb_on_img(img_path, predictions, mode, threshold, threshold_2):
     return base64.b64encode(buf.getbuffer()).decode("ascii")
 
 
-def display_receipt(img_path, results):
-    # TODO: do something with the result dict
+def display_receipt_single(img_path, results):
+
     plt.style.use("seaborn-v0_8-dark")
 
-    fig, ax = plt.subplots(1,2)
+    fig, ax = plt.subplots(1, 1)
 
     img = Image.open(img_path)
-    
-    ax[0].imshow(img)
-    ax[1].imshow(img)
+
+    ax.imshow(img)
+    ax.axis('off')  # Turn off axis
 
     buf = BytesIO()
-    fig.savefig(buf, format="png")
+    fig.savefig(buf, format="png", bbox_inches='tight', pad_inches=0)  
+    buf.seek(0) # TODO: do i need this? 
 
-    return base64.b64encode(buf.getbuffer()).decode("ascii")
+    return base64.b64encode(buf.getvalue()).decode("ascii")
 
      
