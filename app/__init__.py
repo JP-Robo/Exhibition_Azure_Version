@@ -13,11 +13,9 @@ from app.util.image_helpers import draw_bb_on_img
 from app.util.image_helpers import save_img
 from app.util.image_helpers import display_receipt
 
-# TODO: import the module
-# from app.azure_api.captions import 
+from app.azure_api.captions import call_API_Captions
 from app.azure_api.form_recognition import call_API_Receipt
-# form recognition inputs
-# from app.azure_api.form_recognition import *
+
 
 from app.auth import auth as auth_blueprint
 
@@ -160,17 +158,17 @@ def process_receipt():
 
     return render_template("receipt.html", img=img, receipt_info=receipt_info, result_dict=result.to_dict())
 
-    # return render_template("receipt.html", img=img, receipt_info=receipt_info, result_dict=result_dict)
-
 
 @app.route("/process_captions", methods=['POST'])
 @login_required
 def process_captions():
-    # selected_image, img_path = save_img(request) 
+    selected_image, img_path = save_img(request) 
 
     # TODO: call the image caption thingi
+    result = call_API_Captions(img_path)
+    return str(result)
 
-    return "process captions route works"
+    # return "process captions route works"
     # return render_template("captions_upload.html")
     # return render_template("captions.html", img_url=img_path)
 
