@@ -142,9 +142,7 @@ def display_receipt(img_path, results):
     # ax = add_receipt_visualization(ax, results)
 
     buf = BytesIO()
-    fig.savefig(buf, format="png", bbox_inches='tight', pad_inches=0)  
-    # buf.seek(0) # TODO: do i need this? 
+    fig.savefig(buf, format="png")  
 
     return base64.b64encode(buf.getvalue()).decode("ascii")
 
-     

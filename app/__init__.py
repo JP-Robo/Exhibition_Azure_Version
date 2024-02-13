@@ -158,9 +158,10 @@ def process_receipt():
     result_dict = result.to_dict()
     receipt_info = str(result_dict)
 
-    img = display_receipt(img_path, result_dict)
+    # img = display_receipt(img_path, result_dict)
+    return "hello there"
 
-    return render_template("receipt.html", img=img, receipt_info=receipt_info, result_dict=result_dict)
+    # return render_template("receipt.html", img=img, receipt_info=receipt_info, result_dict=result_dict)
 
 
 @app.route("/process_captions", methods=['POST'])
