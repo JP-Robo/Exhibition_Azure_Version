@@ -155,8 +155,8 @@ def process_receipt():
 
     result = call_API_Receipt(img_path)
 
-    result_dict = result.to_dict()
-    receipt_info = str(result_dict)
+    # result_dict = result.to_dict()
+    # receipt_info = str(result_dict)
 
     # img = display_receipt(img_path, result_dict)
     return "hello there"
