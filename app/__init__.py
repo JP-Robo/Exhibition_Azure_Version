@@ -15,7 +15,7 @@ from app.util.image_helpers import display_receipt
 
 # TODO: import the module
 # from app.azure_api.captions import 
-from app.azure_api.form_recognition import get_receipt_info_str, call_API_Receipt
+from app.azure_api.form_recognition import call_API_Receipt
 # form recognition inputs
 # from app.azure_api.form_recognition import *
 
@@ -57,11 +57,6 @@ app = create_app()
 @app.route('/')
 @login_required
 def index():
-    """the index page returns the base template from which other jinja templates inherit
-
-    Returns:
-        _type_: _description_
-    """
     return render_template('base.html')
 
 
@@ -144,6 +139,7 @@ def process_cups():
 
     mode = "cups"
     predictions = custom_vision_predict(img_path, mode)
+
     # TODO: this could be like a slider or some other kind of input
     threshold = 0.5
     threshold_2 = 0.1
