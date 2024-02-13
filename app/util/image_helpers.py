@@ -145,5 +145,5 @@ def display_receipt(img_path, results):
     fig.savefig(buf, format="png")  
 
     # TODO: getbuffer or getvalue?
-    return base64.b64encode(buf.getvalue()).decode("ascii")
+    return base64.b64encode(buf.getbuffer()).decode("ascii")
 
