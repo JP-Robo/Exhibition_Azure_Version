@@ -16,13 +16,3 @@ def call_API_Receipt(img_path):
       poller = document_analysis_client.begin_analyze_document("prebuilt-receipt", img)
 
     return poller.result()
-
-
-def get_receipt_info_str(img_path):
-  try:
-    result = call_API_Receipt(img_path)
-    result = str(result.to_dict())
-  except:
-    result = "api call not working,..."
-    # TODO: rewrite and get the values for the following keys: 'content'
-  return result

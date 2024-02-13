@@ -115,7 +115,7 @@ def draw_bb_on_img(img_path, predictions, mode, threshold, threshold_2):
     return base64.b64encode(buf.getbuffer()).decode("ascii")
 
 
-def display_receipt_single(img_path, results):
+def display_receipt(img_path, results):
 
     plt.style.use("seaborn-v0_8-dark")
 

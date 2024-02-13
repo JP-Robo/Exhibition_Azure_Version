@@ -1,9 +1,6 @@
 import os
 import json
-import sys
 import requests
-import urllib.parse
-import re
 
 from flask import Flask, render_template, request
 from flask_login import LoginManager, login_required
@@ -13,13 +10,12 @@ from werkzeug.utils import secure_filename
 from app.auth import User
 from app.util.custom_vision import custom_vision_predict, custom_vision_classify_moncherie
 from app.util.image_helpers import draw_bb_on_img
-from app.util.transcription import whisper_transcribe
 from app.util.image_helpers import save_img
 from app.util.image_helpers import display_receipt
 
 # TODO: import the module
 # from app.azure_api.captions import 
-from app.azure_api.form_recognition import get_receipt_info_str
+from app.azure_api.form_recognition import get_receipt_info_str, call_API_Receipt
 # form recognition inputs
 # from app.azure_api.form_recognition import *
 
@@ -159,14 +155,16 @@ def process_cups():
 @app.route("/process_receipt", methods=['POST'])
 @login_required
 def process_receipt():
-    selected_image, img_path = save_img(request) 
+    _ , img_path = save_img(request) 
 
-    receipt_info = get_receipt_info_str(img_path)
+    result = call_API_Receipt(img_path)
+
+    result_dict = result.to_dict()
+    receipt_info = str(result_dict)
+
     img = display_receipt(img_path, receipt_info)
 
-    # return "pls no server errror"
-    # TODO: add the azure api call
-    return render_template("receipt.html", img=img, receipt_info=receipt_info)
+    return render_template("receipt.html", img=img, receipt_info=receipt_info, result_dict=result_dict)
 
 
 @app.route("/process_captions", methods=['POST'])
