@@ -156,7 +156,8 @@ def process_receipt():
     result = call_API_Receipt(img_path)
     receipt_info = str(result.to_dict())
 
-    img = display_receipt(img_path, "result_dict")
+    img = display_receipt(img_path, result.to_dict())
+
     return render_template("receipt.html", img=img, receipt_info=receipt_info, result_dict=result.to_dict())
 
     # return render_template("receipt.html", img=img, receipt_info=receipt_info, result_dict=result_dict)

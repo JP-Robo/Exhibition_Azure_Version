@@ -5,9 +5,15 @@
         <div class="row gy-4">
             <h1>CONTENT</h1>
             <h3>{{result_dict['content']}}</h3>
+
             <h1>MerchantName</h1>
             <h3>{{result_dict['documents'][0]['fields']['MerchantName']}}</h3>
-<img class="card-img" src='data:image/png;base64,{{img}}'>
+
+            <h1>MerchantAddress</h1>
+            <h3>{{result_dict['documents'][0]['fields']['MerchantAddress']}}</h3>
+
+            <img class="card-img" src='data:image/png;base64,{{img}}'>
+            
             <p>{{receipt_info}}</p>
         </div>
     </div>
