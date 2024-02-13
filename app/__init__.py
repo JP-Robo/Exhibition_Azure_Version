@@ -151,14 +151,14 @@ def process_cups():
 @app.route("/process_receipt", methods=['POST'])
 @login_required
 def process_receipt():
-    _ , img_path = save_img(request) 
+    selected_image , img_path = save_img(request) 
 
     result = call_API_Receipt(img_path)
 
     result_dict = result.to_dict()
     receipt_info = str(result_dict)
 
-    img = display_receipt(img_path, receipt_info)
+    img = display_receipt(img_path, result_dict)
 
     return render_template("receipt.html", img=img, receipt_info=receipt_info, result_dict=result_dict)
 
