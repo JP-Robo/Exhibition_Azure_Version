@@ -116,14 +116,13 @@ def draw_bb_on_img(img_path, predictions, mode, threshold, threshold_2):
     return base64.b64encode(buf.getbuffer()).decode("ascii")
 
 
-
 def add_receipt_visualization(ax , results):
     page_zero = results['pages'][0]
     lines = page_zero['lines']
     for line in lines:
         polygon = line['polygon']
         polygon_vertices = [(point['x'], point['y']) for point in polygon]
-        rect = Polygon(polygon_vertices, facecolor='g')
+        rect = Polygon(polygon_vertices, facecolor='g',  alpha=0.2)
         ax.add_patch(rect)
     return ax
 
