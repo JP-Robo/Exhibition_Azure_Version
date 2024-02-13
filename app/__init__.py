@@ -154,12 +154,13 @@ def process_receipt():
     selected_image , img_path = save_img(request) 
 
     result = call_API_Receipt(img_path)
+    return str(result.to_dict())
+
 
     # result_dict = result.to_dict()
     # receipt_info = str(result_dict)
 
     # img = display_receipt(img_path, result_dict)
-    return "hello there"
 
     # return render_template("receipt.html", img=img, receipt_info=receipt_info, result_dict=result_dict)
 
