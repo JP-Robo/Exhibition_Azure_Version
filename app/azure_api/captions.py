@@ -11,6 +11,6 @@ def call_API_Captions(img_path):
 
     with open(img_path, "rb") as img:
         # TODO: check out other options
-        result = client.describe_image_in_stream(img)
-        
+        result = client.describe_image_in_stream(img).as_dict()
+
     return result

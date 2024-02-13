@@ -166,7 +166,7 @@ def process_captions():
 
     # TODO: call the image caption thingi
     result = call_API_Captions(img_path)
-    return str(result)
+    return str(result['captions'])
 
     # return "process captions route works"
     # return render_template("captions_upload.html")
