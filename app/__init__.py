@@ -11,7 +11,7 @@ from app.auth import User
 from app.util.custom_vision import custom_vision_predict, custom_vision_classify_moncherie
 from app.util.image_helpers import draw_bb_on_img
 from app.util.image_helpers import save_img
-from app.util.image_helpers import display_receipt
+from app.util.image_helpers import display_receipt, display_captions
 
 from app.azure_api.captions import call_API_Captions
 from app.azure_api.form_recognition import call_API_Receipt
@@ -166,10 +166,9 @@ def process_captions():
 
     # TODO: call the image caption thingi
     result = call_API_Captions(img_path)
-    return str(result['captions'])
 
-    # return "process captions route works"
-    # return render_template("captions_upload.html")
+    img = display_captions(img_path)
+    return render_template("captions_upload.html", info=str(result['captions']), img=img)
     # return render_template("captions.html", img_url=img_path)
 
 

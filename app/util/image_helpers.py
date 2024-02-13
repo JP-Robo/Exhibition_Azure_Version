@@ -146,3 +146,20 @@ def display_receipt(img_path, results):
     # TODO: getbuffer or getvalue?
     return base64.b64encode(buf.getbuffer()).decode("ascii")
 
+
+def display_captions(img_path):
+
+    plt.style.use("seaborn-v0_8-dark")
+
+    fig, ax = plt.subplots(1, 1)
+
+    img = Image.open(img_path)
+
+    ax.imshow(img)
+    ax.axis('off')  # Turn off axis
+
+    buf = BytesIO()
+    fig.savefig(buf, format="png")  
+
+    return base64.b64encode(buf.getbuffer()).decode("ascii")
+

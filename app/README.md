@@ -10,7 +10,3 @@ Sample applications are available for the other frameworks here:
 If you need an Azure account, you can [create one for free](https://azure.microsoft.com/en-us/free/).
 
 
-<!-- <h1>CONTENT</h1>
-<h3>{{result_dict['content']}}</h3>
-<h1>MerchantName</h1>
-<h3>{{receipt_dict['documents'][0]['fields']['MerchantName']}}</h3> -->
